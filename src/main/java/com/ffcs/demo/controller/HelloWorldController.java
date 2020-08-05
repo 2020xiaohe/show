@@ -1,37 +1,27 @@
 package com.ffcs.demo.controller;
 
-import com.ffcs.demo.dao.GoodsInfoDao;
+import com.alibaba.fastjson.JSONObject;
 import com.ffcs.demo.domain.GoodsInfo;
 import com.ffcs.demo.service.GoodsInfoService;
-import io.swagger.annotations.Api;
+import com.ffcs.demo.utils.PicUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.Date;
 
 /**
  * Created by hemb on 2020/8/2.
  */
+@CrossOrigin
 @RestController
-@RequestMapping("test")
+@RequestMapping("api/helloWorld")
 public class HelloWorldController {
-    @Autowired
-    private GoodsInfoService goodsInfoService;
 
+    @CrossOrigin(origins = "*",allowCredentials = "true")
     @GetMapping("/sayHello")
     public  String helloWorld(){
         return "helloWorld";
-    }
-
-    @GetMapping("/getAll")
-    public List<GoodsInfo>  getAll(){
-        List<GoodsInfo> list = goodsInfoService.getGoodsInfoDao().findAll();
-        for (GoodsInfo g: list ) {
-            System.out.println(g);
-        }
-        return  list;
     }
 }

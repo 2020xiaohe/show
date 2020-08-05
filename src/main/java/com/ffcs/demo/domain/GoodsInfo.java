@@ -1,5 +1,8 @@
 package com.ffcs.demo.domain;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,10 +14,10 @@ import java.util.Date;
 @Entity
 @Table(name = "goods_info")
 public class GoodsInfo implements Serializable {
-    private static final long serialVersionUID = -8416017994411044499L;
+    private static final long serialVersionUID = -8790219123224176064L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "goods_id")
     private Integer id;
 
@@ -45,11 +48,19 @@ public class GoodsInfo implements Serializable {
     @Column(name = "status")
     private Integer status;
 
+    @Transient
+    private String statusDesc;
+
     @Column(name = "opr_id")
     private Integer operId;
 
     @Column(name = "opr_date")
     private Date operDate;
+
+    @ManyToOne( cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "goods_type",referencedColumnName="type_id" ,insertable = false, updatable = false)
+    @NotFound(action= NotFoundAction.IGNORE)
+    private GoodsType goodsType;
 
     public Integer getId() {
         return id;
@@ -131,6 +142,14 @@ public class GoodsInfo implements Serializable {
         this.status = status;
     }
 
+    public String getStatusDesc() {
+        return statusDesc;
+    }
+
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
+    }
+
     public Integer getOperId() {
         return operId;
     }
@@ -145,6 +164,14 @@ public class GoodsInfo implements Serializable {
 
     public void setOperDate(Date operDate) {
         this.operDate = operDate;
+    }
+
+    public GoodsType getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(GoodsType goodsType) {
+        this.goodsType = goodsType;
     }
 
     @Override
