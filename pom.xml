@@ -67,7 +67,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<!-- 2、忽略内嵌tomcat，打包部署到tomcat。注*本地运行的时候要把这一段忽略引入个注释掉，
 				要不然项目启动不了 -->
-		<!--	<exclusions>
+			<!--<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -87,7 +87,7 @@
 			</exclusions>
 		</dependency>
 		<!-- 3、引入tomcat依赖 -->
-	<!--	<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
